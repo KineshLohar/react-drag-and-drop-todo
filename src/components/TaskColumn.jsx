@@ -2,7 +2,7 @@ import React from 'react';
 import TaskCard from './TaskCard';
 import DropArea from './DropArea';
 
-const TaskColumn = ({ title, tasks, status, setDraggingTask, onDrop }) => {
+const TaskColumn = ({ title, tasks, status, setDraggingTask, onDrop, handleDelete }) => {
     return (
         <div
 
@@ -20,6 +20,7 @@ const TaskColumn = ({ title, tasks, status, setDraggingTask, onDrop }) => {
                                     title={task.title}
                                     description={task.description}
                                     setDraggingTask={setDraggingTask}
+                                    handleDelete={handleDelete}
                                 />
                                 <DropArea onDrop={() => onDrop(status, index + 1)} />
                             </React.Fragment>

@@ -31,6 +31,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(!taskTitle) return;
     setTasks((prev) => {
       const newTask = {
         id: prev.length + 1,
@@ -60,6 +61,11 @@ function App() {
     setTasks(updatedTasks);
   }
 
+  const handleDelete = (position) => {
+    const updatedTasks = tasks.filter((_, index) => index !== position);
+    setTasks(updatedTasks);
+  }
+
   return (
     <div className="flex flex-col items-stretch justify-start px-16 bg-[#131313] text-white h-screen overflow-y-scroll">
       <h1 className='text-4xl font-medium my-8 mx-auto '>React Drag and Drop Todo List</h1>
@@ -67,7 +73,7 @@ function App() {
         <form onSubmit={handleSubmit} className='flex flex-col gap-4 items-center justify-center mb-8'>
           <input type="text" placeholder='Task Title' onChange={(e) => setTaskTitle(e.target.value)} value={taskTitle} className='bg-transparent border-2 border-white-300 rounded-md p-2 text-white w-6/12' />
           <input type="text" placeholder='Task Description' onChange={(e) => setTaskDescription(e.target.value)} value={taskDescription} className='bg-transparent border-2 border-white-300 rounded-md p-2 text-white w-6/12' />
-          <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-md'>Add Task</button>
+          <button type='submit' disabled={!taskTitle} className='bg-blue-500 text-white px-4 py-2 rounded-md'>Add Task</button>
         </form>
         {/* <div className='flex flex-col gap-4 text-white'>draggin task{draggingTask}</div> */}
       </div>
@@ -79,6 +85,7 @@ function App() {
           setDraggingTask={setDraggingTask} 
           draggingTask={draggingTask} 
           onDrop={onDrop}
+          handleDelete={handleDelete}
         />
         <TaskColumn 
           title="In Progress" 
@@ -87,6 +94,7 @@ function App() {
           setDraggingTask={setDraggingTask} 
           draggingTask={draggingTask} 
           onDrop={onDrop}
+          handleDelete={handleDelete}
         />
         <TaskColumn 
           title="Done" 
@@ -95,6 +103,7 @@ function App() {
           setDraggingTask={setDraggingTask} 
           draggingTask={draggingTask} 
           onDrop={onDrop}
+          handleDelete={handleDelete}
         />
       </div>
     </div>
