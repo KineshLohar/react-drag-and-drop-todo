@@ -47,7 +47,7 @@ function App() {
   const onDrop = (status, position) => {
     console.log(status, position);
 
-    if(!draggingTask) return console.log('no dragging task');;
+    if(draggingTask === null || draggingTask === undefined) return console.log('no dragging task');;
 
     const taskToMove = tasks[draggingTask]
     const updatedTasks = tasks.filter((_, index) => index !== draggingTask);
